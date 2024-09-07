@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webpack Project</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section class="sidebar">
+      <div class="user-info">
+        <ul>
+          <li>
+            <img
+              id="profile-picture"
+              src="<%= require('./assets/images/profile.png') %>"
+              alt="profile picture"
+            />
+          </li>
+          <li>Jane Doe</li>
+          <li>
+            <img
+              id="notification-icon"
+              src="<%= require('./assets/icons/bell.svg') %>"
+              alt="notification icon"
+            />
+          </li>
+        </ul>
+      </div>
+      <div class="navbar">
+        <ul>
+          <li id="add-task-button">
+            <img
+              src="<%= require('./assets/icons/add.svg') %>"
+              alt="add icon"
+            /><span style="color: #c70000; font-weight: bold">Add Task</span>
+          </li>
+          <li>
+            <img
+              src="<%= require('./assets/icons/inbox.svg') %>"
+              alt="inbox icon"
+            />Inbox
+          </li>
+          <li>
+            <img
+              src="<%= require('./assets/icons/calendar-day.svg') %>"
+              alt="daily calendar icon"
+            />Today
+          </li>
+          <li>
+            <img
+              src="<%= require('./assets/icons/calendar-week.svg') %>"
+              alt="weekly calendar icon"
+            />This Week
+          </li>
+          <li>
+            <img
+              src="<%= require('./assets/icons/tasks.svg') %>"
+              alt="tasks icon"
+            />All Tasks
+          </li>
+        </ul>
+      </div>
+      <div class="projects-navbar">
+        <div class="projects-navbar-title">
+          <p>My Projects</p>
+          <img
+            src="<%= require('./assets/icons/add2.svg') %>"
+            alt="add icon"
+            id="add-project-button"
+          />
+        </div>
+        <ul>
+          <li><span>#</span>Project 1</li>
+          <li><span>#</span>Project 2</li>
+          <li><span>#</span>Project 3</li>
+        </ul>
+      </div>
+    </section>
+  </body>
+</html>
