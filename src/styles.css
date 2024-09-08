@@ -1,3 +1,9 @@
+:root {
+  --high-priority-color: #c70000;
+  --medium-priority-color: #ffd232;
+  --low-priority-color: #38c869;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -16,6 +22,7 @@ body {
   background-color: #f3f1f1;
   height: 100vh;
   padding: 1.5rem;
+  overflow: hidden;
 }
 
 ul {
@@ -89,4 +96,138 @@ li {
 #add-project-button {
   padding: 0.6rem;
   border-radius: 7px;
+}
+
+.todo {
+  width: 100%;
+  overflow-y: auto;
+}
+
+.todo > h1 {
+  font-size: 2rem;
+  margin: 5rem 5rem -4rem 5rem;
+}
+
+.todo-list {
+  margin: 5rem 2rem 0rem 2rem;
+}
+
+.todo-item {
+  padding: 1.2rem 1rem 0rem 1rem;
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.todo-elements {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding-bottom: 1rem;
+  border-bottom: 0.5px solid #838383;
+  width: 100%;
+}
+
+.todo-title,
+.title-input,
+.title-input::placeholder {
+  color: black;
+  font-size: 1rem;
+}
+
+.todo-description,
+.description-input {
+  color: #838383;
+  font-size: 0.9rem;
+}
+
+.todo-dueDate {
+  color: var(--high-priority-color);
+  font-size: 0.9rem;
+}
+
+.todo-priority {
+  display: flex;
+  gap: 0.3rem;
+  color: #838383;
+  font-size: 0.9rem;
+}
+
+.todo-priority-color {
+  width: 15px;
+  height: 15px;
+  border: none;
+  outline: none;
+}
+
+.delete-task-button {
+  margin-left: auto;
+}
+
+.unchecked-todo {
+  height: 1.5rem;
+}
+
+.checked-todo {
+  text-decoration: line-through;
+}
+
+.high-priority-color {
+  background-color: var(--high-priority-color);
+}
+.medium-priority-color {
+  background-color: var(--medium-priority-color);
+}
+.low-priority-color {
+  background-color: var(--low-priority-color);
+}
+
+/* New todo Form styling */
+
+.todo-form {
+  margin: 0rem 2rem;
+  padding: 1.2rem 1rem 0rem 1rem;
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.form-elements {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding-bottom: 1rem;
+  border-bottom: 0.5px solid #838383;
+  width: 100%;
+}
+
+.form-elements input {
+  text-decoration: none;
+  outline: none;
+  background: none;
+  border: none;
+}
+
+.priority-select {
+  width: 8rem;
+  padding: 0.1rem;
+}
+
+.due-date-input {
+  width: 8rem;
+}
+
+.submit-task {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  color: white;
+  background-color: #34b45f;
+  border-radius: 5px;
+  padding: 0.5rem;
+  width: 8rem;
+  align-self: center;
 }
