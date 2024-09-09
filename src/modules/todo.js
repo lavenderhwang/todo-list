@@ -1,6 +1,8 @@
 import unchecked from "../assets/icons/unchecked.svg";
 import checked from "../assets/icons/checked.svg";
 import deleteIcon from "../assets/icons/delete.svg";
+import { filterToday, filterWeek } from "./filter.js";
+import { openEditForm } from "./newTodo.js";
 
 // Set up empty array to store todos
 let todos = [];
@@ -32,10 +34,25 @@ function addTodo(title, description, dueDate, priority) {
   saveTodos();
 }
 
-function renderTodos() {
+function updateTodo(id, title, description, dueDate, priority) {
+  const todoIndex = todos.findIndex((todo) => todo.id === id);
+  if (todoIndex !== -1) {
+    todos[todoIndex] = {
+      ...todos[todoIndex],
+      title,
+      description,
+      dueDate,
+      priority,
+    };
+    saveTodos();
+    renderTodos();
+  }
+}
+
+function renderTodos(filteredTodos = todos) {
   const todoList = document.querySelector("#todo-list");
   todoList.innerHTML = ""; // Clear existing items
-  todos.forEach((todo, index) => {
+  filteredTodos.forEach((todo, index) => {
     const todoItem = document.createElement("ul");
     todoItem.classList.add("todo-item");
 
@@ -98,6 +115,10 @@ function renderTodos() {
     todoElements.appendChild(priorityElement);
     todoElements.appendChild(dueDateElement);
 
+    todoElements.addEventListener("click", () => {
+      openEditForm(todo); // Pass the clicked todo item as container
+    });
+
     todoItem.appendChild(uncheckedButton);
     todoItem.appendChild(todoElements);
     todoItem.appendChild(deleteElement);
@@ -154,4 +175,32 @@ function deleteTodo(index) {
   renderTodos();
 }
 
-export { addTodo, renderTodos, loadTodos };
+const todoSectionTitle = document.getElementById("todo-section-title");
+const todayNav = document.getElementById("today-nav");
+const weekNav = document.getElementById("week-nav");
+const inboxNav = document.getElementById("inbox-nav");
+const allTasksNav = document.getElementById("all-tasks-nav");
+
+todayNav.addEventListener("click", () => {
+  const todayTodos = filterToday(todos);
+  todoSectionTitle.innerText = "Today";
+  renderTodos(todayTodos);
+});
+
+weekNav.addEventListener("click", () => {
+  const weekTodos = filterWeek(todos);
+  todoSectionTitle.innerText = "This Week";
+  renderTodos(weekTodos);
+});
+
+inboxNav.addEventListener("click", () => {
+  todoSectionTitle.innerText = "Inbox";
+  renderTodos(todos);
+});
+
+allTasksNav.addEventListener("click", () => {
+  todoSectionTitle.innerText = "All Tasks";
+  renderTodos(todos);
+});
+
+export { addTodo, updateTodo, renderTodos, loadTodos };

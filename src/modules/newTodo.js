@@ -1,10 +1,10 @@
-import { addTodo } from "./todo.js";
+import { addTodo, updateTodo } from "./todo.js";
 import unchecked from "../assets/icons/unchecked.svg";
 import deleteIcon from "../assets/icons/delete.svg";
 
 const todoContainer = document.querySelector(".todo");
 
-function loadTodoForm() {
+function loadTodoForm(todo = null) {
   if (document.querySelector(".todo-form")) return;
 
   const form = document.createElement("form");
@@ -53,7 +53,12 @@ function loadTodoForm() {
 
   const submitTask = document.createElement("button");
   submitTask.type = "submit";
-  submitTask.textContent = "Add Task";
+  if (todo) {
+    submitTask.textContent = "Update Task";
+  } else {
+    submitTask.textContent = "Add Task";
+  }
+
   submitTask.classList.add("submit-task");
 
   const deleteTask = document.createElement("img");
@@ -79,6 +84,19 @@ function loadTodoForm() {
 
   todoContainer.appendChild(form);
 
+  if (todo) {
+    titleInput.value = todo.title;
+    descriptionInput.value = todo.description;
+    dueDateInput.value = todo.dueDate;
+    prioritySelect.value = todo.priority;
+    // Set a hidden input or a flag to indicate which to-do is being edited
+    const editIndexInput = document.createElement("input");
+    editIndexInput.type = "hidden";
+    editIndexInput.id = "edit-index";
+    editIndexInput.value = todo.id;
+    form.appendChild(editIndexInput);
+  }
+
   // Handle form submission
   form.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
@@ -87,8 +105,13 @@ function loadTodoForm() {
       const description = descriptionInput.value;
       const dueDate = dueDateInput.value;
       const priority = prioritySelect.value;
+      const index = document.getElementById("edit-index")?.value;
 
-      addTodo(title, description, dueDate, priority);
+      if (index) {
+        updateTodo(parseInt(index), title, description, dueDate, priority);
+      } else {
+        addTodo(title, description, dueDate, priority);
+      }
 
       form.reset();
       form.remove(); // Remove the form from the DOM
@@ -114,4 +137,8 @@ function loadTodoForm() {
   });
 }
 
-export { loadTodoForm };
+function openEditForm(todo) {
+  loadTodoForm(todo);
+}
+
+export { loadTodoForm, openEditForm };

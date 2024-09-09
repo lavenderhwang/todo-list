@@ -35,25 +35,25 @@
               alt="add icon"
             /><span style="color: #c70000; font-weight: bold">Add Task</span>
           </li>
-          <li>
+          <li id="inbox-nav">
             <img
               src="<%= require('./assets/icons/inbox.svg') %>"
               alt="inbox icon"
             />Inbox
           </li>
-          <li>
+          <li id="today-nav">
             <img
               src="<%= require('./assets/icons/calendar-day.svg') %>"
               alt="daily calendar icon"
             />Today
           </li>
-          <li>
+          <li id="week-nav">
             <img
               src="<%= require('./assets/icons/calendar-week.svg') %>"
               alt="weekly calendar icon"
             />This Week
           </li>
-          <li>
+          <li id="all-tasks-nav">
             <img
               src="<%= require('./assets/icons/tasks.svg') %>"
               alt="tasks icon"
@@ -79,7 +79,7 @@
     </section>
 
     <section class="todo">
-      <h1>Inbox</h1>
+      <h1 id="todo-section-title">Inbox</h1>
       <div id="todo-list"></div>
     </section>
   </body>
