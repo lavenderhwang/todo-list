@@ -20,13 +20,14 @@ function loadTodos() {
   }
 }
 
-function addTodo(title, description, dueDate, priority) {
+function addTodo(title, description, dueDate, priority, project = "Inbox") {
   const newTodo = {
     id: id++,
     title,
     description,
     dueDate,
     priority,
+    project,
     completed: false,
   };
   todos.push(newTodo);
@@ -34,7 +35,7 @@ function addTodo(title, description, dueDate, priority) {
   saveTodos();
 }
 
-function updateTodo(id, title, description, dueDate, priority) {
+function updateTodo(id, title, description, dueDate, priority, project) {
   const todoIndex = todos.findIndex((todo) => todo.id === id);
   if (todoIndex !== -1) {
     todos[todoIndex] = {
@@ -43,6 +44,7 @@ function updateTodo(id, title, description, dueDate, priority) {
       description,
       dueDate,
       priority,
+      project,
     };
     saveTodos();
     renderTodos();
@@ -203,4 +205,22 @@ allTasksNav.addEventListener("click", () => {
   renderTodos(todos);
 });
 
-export { addTodo, updateTodo, renderTodos, loadTodos };
+function filterTodosByProject(project) {
+  const filteredTodos = todos.filter((todo) => todo.project === project);
+  todoSectionTitle.innerText = project;
+  renderTodos(filteredTodos);
+}
+
+function updateSectionTitle() {
+  todoSectionTitle.innerText = "Inbox";
+  renderTodos(todos);
+}
+
+export {
+  addTodo,
+  updateTodo,
+  renderTodos,
+  loadTodos,
+  filterTodosByProject,
+  updateSectionTitle,
+};

@@ -1,10 +1,12 @@
 import { addTodo, updateTodo } from "./todo.js";
+import { updateProjectDropdown } from "./projects.js";
 import unchecked from "../assets/icons/unchecked.svg";
 import deleteIcon from "../assets/icons/delete.svg";
 
 const todoContainer = document.querySelector(".todo");
 
 function loadTodoForm(todo = null) {
+  // Ensures only one form can be open at a time
   if (document.querySelector(".todo-form")) return;
 
   const form = document.createElement("form");
@@ -51,6 +53,15 @@ function loadTodoForm(todo = null) {
     prioritySelect.appendChild(option);
   });
 
+  const projectSelect = document.createElement("select");
+  projectSelect.name = "project";
+  projectSelect.classList.add("project-select");
+
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "Inbox";
+  defaultOption.textContent = "Project";
+  projectSelect.appendChild(defaultOption);
+
   const submitTask = document.createElement("button");
   submitTask.type = "submit";
   if (todo) {
@@ -71,6 +82,7 @@ function loadTodoForm(todo = null) {
     descriptionInput,
     prioritySelect,
     dueDateInput,
+    projectSelect,
     submitTask,
   ];
 
@@ -84,11 +96,15 @@ function loadTodoForm(todo = null) {
 
   todoContainer.appendChild(form);
 
+  // Call updateProjectDropdown to ensure the dropdown is updated
+  updateProjectDropdown();
+
   if (todo) {
     titleInput.value = todo.title;
     descriptionInput.value = todo.description;
     dueDateInput.value = todo.dueDate;
     prioritySelect.value = todo.priority;
+    projectSelect.value = todo.project || "Inbox";
     // Set a hidden input or a flag to indicate which to-do is being edited
     const editIndexInput = document.createElement("input");
     editIndexInput.type = "hidden";
@@ -105,12 +121,20 @@ function loadTodoForm(todo = null) {
       const description = descriptionInput.value;
       const dueDate = dueDateInput.value;
       const priority = prioritySelect.value;
+      const project = projectSelect.value;
       const index = document.getElementById("edit-index")?.value;
 
       if (index) {
-        updateTodo(parseInt(index), title, description, dueDate, priority);
+        updateTodo(
+          parseInt(index),
+          title,
+          description,
+          dueDate,
+          priority,
+          project,
+        );
       } else {
-        addTodo(title, description, dueDate, priority);
+        addTodo(title, description, dueDate, priority, project);
       }
 
       form.reset();
@@ -124,8 +148,9 @@ function loadTodoForm(todo = null) {
     const description = descriptionInput.value;
     const dueDate = dueDateInput.value;
     const priority = prioritySelect.value;
+    const project = projectSelect.value;
 
-    addTodo(title, description, dueDate, priority);
+    addTodo(title, description, dueDate, priority, project);
 
     form.reset();
     form.remove(); // Remove the form from the DOM
