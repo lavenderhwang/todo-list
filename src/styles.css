@@ -23,6 +23,8 @@ body {
   height: 100vh;
   padding: 1.5rem;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 ul {
@@ -238,7 +240,7 @@ li {
 }
 
 .projects {
-  margin: 0;
+  margin: 0 0 2.5rem 0;
   padding: 0;
 }
 
@@ -247,6 +249,7 @@ li {
   flex-direction: column;
   margin: 0;
   padding: 0;
+  margin-bottom: 2.5rem;
 }
 
 .project-list-item {
@@ -291,4 +294,21 @@ li {
 
 .delete-project-button {
   margin-left: auto;
+}
+
+.signature {
+  font-size: 0.8rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+}
+
+.github-link {
+  font-weight: bold;
+}
+
+.github-icon {
+  width: 20px;
 }
