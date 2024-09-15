@@ -1,6 +1,6 @@
 # To-Do List Project
 
-This is a simple **To-Do List** project built as part of [The Odin Project's JavaScript Curriculum](https://www.theodinproject.com/). It allows users to manage their tasks, organize them by projects, and filter tasks by due date.
+This is a simple **To-Do List** [project](https://www.theodinproject.com/lessons/node-path-javascript-todo-list) built as part of [The Odin Project's JavaScript Curriculum](https://www.theodinproject.com/). It allows users to manage their tasks, organize them by projects, and filter tasks by due date.
 
 ## Features
 
